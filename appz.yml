@@ -31,4 +31,4 @@ properties:
     POSTGRES_DB: prefect_server
     POSTGRES_PASSWORD: 
       vault: POSTGRESQL_PASSWORD
-    revision : 79
+    revision : 80
