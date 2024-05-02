@@ -1,0 +1,34 @@
+app:
+    name: Postgres Master
+    code: POSTGRES
+    notify: mpmathew@ecloudcontrol.com
+    
+build:
+    version: 16.X
+    env: DEV
+    build_file: none
+    output_files: output/*.zip
+    image_template: postgres-16.2exf
+    
+deploy:
+    context: exf/DEV
+    type: statefulset
+    ingress: none
+    replicas: 1
+    port:
+    - 5432
+    
+volumes:
+  - claim: postgres-data
+    mount: /var/lib/postgresql/data
+    name: data
+    size: 5Gi
+    mode: ReadWriteOnce   
+    
+properties:
+    PG_DATA: /var/lib/postgresql/data
+    POSTGRES_USER: prefect
+    POSTGRES_DB: prefect_server
+    POSTGRES_PASSWORD: 
+      vault: POSTGRESQL_PASSWORD
+    revision : 78
